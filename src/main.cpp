@@ -90,82 +90,7 @@ if (limitToggle == true){
   }
   
 }
-/*
-void flywheel(float speed){
-	flywheel_1.move_voltage(speed*(12000.0/127));
-	flywheel_2.move_voltage(speed*(12000.0/127));
-} 
 
-
-void leftStrafe(float speed){
-	left_frt.move(-speed);
-	right_bck.move(-speed);
-	left_bck.move(speed);
-	right_frt.move(speed);
-}
-
-void rightStrafe(float speed){
-	left_frt.move(speed);
-	right_bck.move(speed);
-	left_bck.move(-speed);
-	right_frt.move(-speed);
-}
-
-
-
-void MoveBaseTank(){
-	float l;
-	float r;
-	float strafe;
-	l = (master.get_analog(ANALOG_LEFT_Y));
-	r = (master.get_analog(ANALOG_RIGHT_Y));
-	strafe = ((master.get_analog(ANALOG_LEFT_X)));
-
-	if (strafe <= 35 && strafe >= -35){
-		drive(l, r);
-	}
-	else{
-		if (strafe <= 35){
-			left_frt.move(l+strafe);
-			right_bck.move(r+strafe);
-			left_bck.move(l-strafe);
-			right_frt.move(r-strafe);
-			//leftStrafe(-strafe);
-		}
-		else if (strafe >= 35){
-			left_frt.move(l+strafe);
-			right_bck.move(r+strafe);
-			left_bck.move(l-strafe);
-			right_frt.move(r-strafe);
-			//rightStrafe(strafe);
-		}
-		else{ 
-			brake();
-		}
-	}
-}
-
-void shoot(int time){
-	piston.set_value(true);
-	pros::delay(time);
-	piston.set_value(false);
-}
-
-void TripleShoot(int time){
-	piston.set_value(true);
-	pros::delay(125);
-	piston.set_value(false);
-	pros::delay(time);
-	piston.set_value(true);
-	pros::delay(125);
-	piston.set_value(false);
-	pros::delay(time);
-	piston.set_value(true);
-	pros::delay(250);
-	piston.set_value(false);
-	pros::delay(time);
-}
-*/
 void InchDrive(float target, int speed){
 	float x = 0;
 	while(x <= target) {
@@ -182,30 +107,6 @@ void InchDrive(float target, int speed){
     brake();
 }
 
-/*
-void InchDriveLeft(float target, int speed){
-	float x = 0;
-    while(x <= target) {
-        //yaw = gyro.get_yaw();
-        x = left_bck.get_position()*3.1415*4.0;
-        left_frt.move_voltage(-speed*12000/127);
-        left_bck.move_voltage(0.95*speed*12000/127);
-        right_frt.move_voltage(speed*12000/127);
-        right_bck.move_voltage(0.95*-speed*12000/127);
-        pros::delay(20);
-		
-      //  if(yaw>=2){
-        //    left_frt.move(-speed*error-(yaw));
-          //  left_bck.move(0.7*speed*error+(yaw));
-           // right_frt.move(speed*error+(yaw));
-           // right_bck.move(0.7*-speed*error-(yaw));
-	//	}
-		
-    }
-	left_bck.tare_position();
-    brake();
-}
-*/
 
 
 void task(float speed, float yaw, float error){
@@ -218,53 +119,7 @@ void task(float speed, float yaw, float error){
 }
 
 
-/*
-void InchDriveLeft2(float target, int speed){
-	float x = 0;
-	float yaw = 0;
-	float error = 0;
-	pros::Task dog{ [speed, yaw, error] {
-        while (pros::Task::notify_take(true, TIMEOUT_MAX)) {
-            task(speed, yaw, error);
-		}}};
-    while(x <= target) {
-        yaw = gyro.get_yaw();
-        x = left_bck.get_position()*3.1415*4.0;
-		error = target - x;
-        //left_frt.move_voltage(-speed*12000/127);
-	    dog.notify();
-        if(yaw>=4){
-			pros::screen::print(pros::E_TEXT_LARGE, 1, "Correction: %3f", gyro.get_yaw());
-			left_bck.move_voltage(0.95*speed*12000/127);
-			left_frt.move_voltage(-0.95*speed*12000/127);
-			right_frt.move_voltage(speed*12000/127);
-			right_bck.move_voltage(-0.95*-speed*12000/127);
-			pros::delay(20);
-			
-        }
-    } 
-		
-	left_bck.tare_position();
-    brake();
-}
 
-
-
-void InchDriveRight(float target, int speed){
-	left_frt.tare_position();
-    float x = 0;
-    while(x <= target) {
-        x = left_frt.get_position()*3.1415*4.0;
-        left_frt.move_voltage(speed*12000/127);
-        left_bck.move_voltage(0.92*-speed*12000/127);
-        right_frt.move_voltage(-speed*12000/127);
-        right_bck.move_voltage(0.92*speed*12000/127);
-        pros::delay(20);
-  }
-  brake();
-}
-
-*/
 void InchDriveBck(float target, int speed){
 	left_bck.tare_position();
 	float x = 0;
