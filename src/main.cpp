@@ -292,10 +292,6 @@ void opcontrol() {
     } }; */
 	while (true) {
 		//f_PID.notify();
-		//pros::screen::print(pros::E_TEXT_LARGE, 1, "Heading: %3f", gyro.get_heading());
-		//pros::screen::print(pros::E_TEXT_LARGE, 3, "Flywheel: %3f", flywheel_1.get_actual_velocity());
-		//pros::screen::print(pros::E_TEXT_LARGE, 5, "Flywheel 2: %3f", flywheel_2.get_actual_velocity());
-		//pros::screen::print(pros::E_TEXT_LARGE, 7, "Yaw: %3f", gyro.get_yaw());
 		//MoveBaseTank();
 		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
 			expansion.set_value(true);
@@ -340,10 +336,10 @@ pullbackShoot();		};
 			}
 		} */
 		if((master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))){
-			intake(127);
+			intake(600);
 		}
 		else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
-			intake(-127);
+			intake(-600);
 		}
 		else{
 			intake(0);
